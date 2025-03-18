@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Effects Grid</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            row-gap: 20px;
+            width: min(600px, 90%);
+            justify-content: center;
+        }
+
+        .div-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .button-container {
+            width: 55px; /* Slightly smaller */
+            height: 70px; /* Slightly smaller */
+            background-color: red; /* Fills transparent areas */
+            border-radius: 90px;
+            
+        }
+        
+        .button {
+            width: 104px;
+            height: 99px;
+            background-image: url('https://www.myinstants.com/media/images/transparent_button_small_sprite.png');
+            background-position: 0 0;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            transition: transform 0.05s;
+            position: relative;
+        }
+
+        .button:active {
+            background-position: -104px 0;
+        }
+        
+        .label {
+            margin-top: 5px;
+            font-size: 16px;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .img {
+        width: auto;
+    }
+
+    @media (max-width: 768px) { /* Target screens with width 768px or less (mobile devices) */
+        .img {
+            width: 90%;
+        }
+    }
+
+
+    </style>
+</head>
+<body >
+    <img src="logo.png" class="img"></img>
+    <div class="grid" id="grid"></div>
+    
+    <script>
+        const sounds = [
+            "aaaaaaaa", "error", "maro-jump", "taco-bell-bong", "among-us",
+            "eye-of-rah", "train-horn", "android-notification", "flashbang",
+            "metal-pipe-falling", "undertakers-bell", "anime-wow", "glass-breaking", "money",
+            "vine-boom", "bruh", "huh", "perfect-fart", "cartoon-running",
+            "let-me-know", "spongebob-fail", "dry-fart", "mac-quack", "ta-da"
+        ];
+
+        let currentAudio = null;
+        const grid = document.getElementById("grid");
+        
+        sounds.forEach(sound => {
+            const container = document.createElement("div");
+            container.classList.add("div-container");
+            
+            const button = document.createElement("div");
+            
+            button.classList.add("button");
+            button.addEventListener("click", () => {
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+                currentAudio = new Audio(`/sound-effects/${sound}.mp3`);
+                currentAudio.play();
+            });
+            button.classList.add("button-container");
+            
+            const label = document.createElement("div");
+            label.classList.add("label");
+            label.textContent = sound.replace(/-/g, ' ');
+            
+            container.appendChild(button);
+            container.appendChild(label);
+            grid.appendChild(container);
+        });
+    </script>
+</body>
+</html>
