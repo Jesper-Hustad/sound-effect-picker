@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sound Effects Grid</title>
@@ -107,7 +106,7 @@
                     currentAudio.pause();
                     currentAudio.currentTime = 0;
                 }
-                currentAudio = new Audio(`/sound-effects/${sound}.mp3`);
+                currentAudio = new Audio(`sound-effects/${sound}.mp3`);
                 currentAudio.play();
             });
             button.classList.add("button-container");
