@@ -55,7 +55,11 @@
             position: relative;
         }
 
-        .button:active {
+        /* .button:active {
+            background-position: -104px 0;
+        } */
+
+        .force-active {
             background-position: -104px 0;
         }
         
@@ -117,6 +121,12 @@
                 }
                 currentAudio = new Audio(`sound-effects/${sound}.mp3`);
                 currentAudio.play();
+
+         
+                const button = event.currentTarget;
+                // Add a class that mimics the active state
+                button.classList.add('force-active');
+                setTimeout(() => {button.classList.remove('force-active');}, 200);
             });
             button.classList.add("button-container");
             
